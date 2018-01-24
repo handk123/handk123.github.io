@@ -9,7 +9,7 @@
    tempfile &apos;G:\app\ASUS\oradata\orcl\有一个dbf后缀的文件&apos; (自己本机安装位置)
    size 10M
    autoextend on
-   next 10M masize unilimited
+   next 10M maxsize unlimited
    extent management local;
 </code></pre><h3 id="创建表空间"><a href="#创建表空间" class="headerlink" title="创建表空间"></a>创建表空间</h3><pre><code>create tablespace 表空间名
     logging datafile &apos;G:\app\ASUS\oradata\orcl\有一个dbf后缀的文件&apos;
@@ -24,7 +24,7 @@
 grant dba to newuser;
 </code></pre><h3 id="授权操作表的权限"><a href="#授权操作表的权限" class="headerlink" title="授权操作表的权限"></a>授权操作表的权限</h3><pre><code>grant select,insert on 表名 to scott; (当前用户)
 grant delete,update on 用户名.表名 to scott; (系统管理员)
-</code></pre><h2 id="二、SQL函数"><a href="#二、SQL函数" class="headerlink" title="二、SQL函数"></a>二、SQL函数</h2>]]></content>
+</code></pre><h2 id="二、SQL函数"><a href="#二、SQL函数" class="headerlink" title="二、SQL函数:"></a>二、SQL函数:</h2>]]></content>
       
         <categories>
             
