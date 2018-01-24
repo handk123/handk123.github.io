@@ -22,6 +22,8 @@
     default tablespace 表空间名;
 </code></pre><h3 id="授权给新建的用户"><a href="#授权给新建的用户" class="headerlink" title="授权给新建的用户"></a>授权给新建的用户</h3><pre><code>grant connect,resource to newuser
 grant dba to newuser;
+</code></pre><h3 id="授权操作表的权限"><a href="#授权操作表的权限" class="headerlink" title="授权操作表的权限"></a>授权操作表的权限</h3><pre><code>grant select,insert on 表名 to scott; (当前用户)
+grant delete,update on 用户名.表名 to scott; (系统管理员)
 </code></pre>]]></content>
       
         <categories>
