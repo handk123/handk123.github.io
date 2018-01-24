@@ -5,14 +5,14 @@
     <entry>
       <title><![CDATA[Oracle]]></title>
       <url>/2018/01/24/dba/</url>
-      <content type="html"><![CDATA[<h2 id="一、基础部分："><a href="#一、基础部分：" class="headerlink" title="一、基础部分："></a>一、基础部分：</h2><h3 id="创建临时表空间"><a href="#创建临时表空间" class="headerlink" title="创建临时表空间"></a>创建临时表空间</h3><pre><code>create temporary tablespace 临时表空间名
-   tempfile &apos;G:\app\ASUS\oradata\orcl\有一个dbf后缀的文件&apos; (自己本机安装位置)
+      <content type="html"><![CDATA[<h2 id="一、基础部分："><a href="#一、基础部分：" class="headerlink" title="一、基础部分："></a>一、基础部分：</h2><h3 id="创建临时表空间-sys用户才可以创建表空间"><a href="#创建临时表空间-sys用户才可以创建表空间" class="headerlink" title="创建临时表空间 (sys用户才可以创建表空间)"></a>创建临时表空间 (sys用户才可以创建表空间)</h3><pre><code>create temporary tablespace 临时表空间名
+   tempfile &apos;G:\app\ASUS\oradata\orcl\创建一个dbf后缀的文件&apos; (自己本机安装位置)
    size 10M
    autoextend on
    next 10M maxsize unlimited
    extent management local;
 </code></pre><h3 id="创建表空间"><a href="#创建表空间" class="headerlink" title="创建表空间"></a>创建表空间</h3><pre><code>create tablespace 表空间名
-    logging datafile &apos;G:\app\ASUS\oradata\orcl\有一个dbf后缀的文件&apos;
+    logging datafile &apos;G:\app\ASUS\oradata\orcl\创建一个dbf后缀的文件且与上方的文件名字不同&apos;
     size 10M
     autoextend on
     next 10M maxsize unlimited
