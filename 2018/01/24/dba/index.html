@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Handk">
 <meta property="og:description" content="一、基础部分：创建临时表空间 (sys用户才可以创建表空间)create temporary tablespace 临时表空间名    tempfile &amp;apos;G:\app\ASUS\oradata\orcl\创建一个dbf后缀的文件&amp;apos; (自己本机安装位置)    size 10M    autoextend on    next 10M maxsize unlimited">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-24T07:43:16.193Z">
+<meta property="og:updated_time" content="2018-01-24T12:34:27.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Oracle">
 <meta name="twitter:description" content="一、基础部分：创建临时表空间 (sys用户才可以创建表空间)create temporary tablespace 临时表空间名    tempfile &amp;apos;G:\app\ASUS\oradata\orcl\创建一个dbf后缀的文件&amp;apos; (自己本机安装位置)    size 10M    autoextend on    next 10M maxsize unlimited">
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  201 字
+                  1,330 字
                 </span>
               
 
@@ -449,7 +449,73 @@
 grant dba to newuser;
 </code></pre><h3 id="授权操作表的权限"><a href="#授权操作表的权限" class="headerlink" title="授权操作表的权限"></a>授权操作表的权限</h3><pre><code>grant select,insert on 表名 to scott; (当前用户)
 grant delete,update on 用户名.表名 to scott; (系统管理员)
-</code></pre><h2 id="二、SQL函数"><a href="#二、SQL函数" class="headerlink" title="二、SQL函数:"></a>二、SQL函数:</h2>
+</code></pre><h2 id="二、Oracle数据库常用内置函数："><a href="#二、Oracle数据库常用内置函数：" class="headerlink" title="二、Oracle数据库常用内置函数："></a>二、Oracle数据库常用内置函数：</h2><h3 id="1-分类"><a href="#1-分类" class="headerlink" title="1.分类"></a>1.分类</h3><pre><code>1）单行函数
+    a.字符函数
+    b.数字函数
+    c.转换函数
+    d.日期函数
+2）聚合函数
+</code></pre><h3 id="2-详细介绍"><a href="#2-详细介绍" class="headerlink" title="2.详细介绍"></a>2.详细介绍</h3><h4 id="emsp-1-单行函数-就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果"><a href="#emsp-1-单行函数-就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果" class="headerlink" title="&emsp;1)单行函数:就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果"></a>&emsp;1)单行函数:就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果</h4><h5 id="emsp-emsp-a-字符函数：操作的对象是字符串"><a href="#emsp-emsp-a-字符函数：操作的对象是字符串" class="headerlink" title="&emsp;&emsp;a.字符函数：操作的对象是字符串"></a>&emsp;&emsp;a.字符函数：操作的对象是字符串</h5><pre><code>常用的有：
+    ascii(X): 返回字符X的ASCII码
+    chr(X):    将ascii值转换为对应的字符
+    concat(X,Y): 连接字符串X,y
+    lower(X): 将字符串X转换成小写
+    upper(X): 将字符串X中所有的字符转换为大写
+    initcap(X): 将字符串X中所有的内容，首写字母大写,其余字母小写
+    例：select ascii(&apos;A&apos;),chr(&apos;65&apos;),concat(&apos;ha&apos;,&apos;ppy&apos;),lower(&apos;Ha&apos;),upper(&apos;ha&apos;),initcap(&apos;HeN word&apos;) from dual;
+        结果：65    A    happy     ha    HA    Hen Word
+
+    instr(a1,a2,x,y): 取子串a2在a1中的位置
+        x表示在a1中开始搜索的位置,y表示字符串a2出现的次数
+        如果x表示负数，就说明从尾部开始的搜索,一般x,y默认为1
+    例：select instr(&apos;aaahellohello&apos;,&apos;he&apos;,1,1),instr(&apos;aaahellohello&apos;,&apos;he&apos;,1,2),instr(&apos;aaahellohello&apos;,&apos;he&apos;,-1,1) from dual;
+        结果：4        9        9
+    substr(a1,x,y):    在字符串a1中,从x开始,长度为y的子串
+        x&gt;0,从头开始搜索
+        x&lt;0,从尾部开始搜索
+    select substr(&apos;12345678&apos;,-2,2),substr(&apos;123456&apos;,3,2) from dual;
+        结果：78 34
+    ltrim(a1,set): 从a1左边开始,除了set中的字符,全部打印出来(若set中的字符在a1中间,则将a1全部打印出来)
+    rtrim(a1,set):    从a1右边开始,只要遇见不是set中的字符,马上结束并返回结果(若set中的字符在a1中间,则将a1全部打印出来)
+    trim(c from a2): 只能从a2的头部,尾部,或者两端截去字符c(c只能是一个字符)
+    replace(a1,a2,a3): 将a1字符串中的子串a2用a3代替.
+        若a2为null,则返回原来a1;若a3为null,则会去掉子串a2,重新打印出a1
+        select replace(&apos;aa-bb&apos;,&apos;bb&apos;,&apos;c&apos;),
+            replace(&apos;aa-bb&apos;,&apos;bb&apos;),
+            replace(&apos;aa-bb&apos;,&apos;c&apos;)
+        from dual;
+        结果：aa-c  aa- aa-bb
+</code></pre><h5 id="emsp-emsp-b-数字函数：参数可以是表中的-也可以是一个数字表达式"><a href="#emsp-emsp-b-数字函数：参数可以是表中的-也可以是一个数字表达式" class="headerlink" title="&emsp;&emsp;b.数字函数：参数可以是表中的,也可以是一个数字表达式"></a>&emsp;&emsp;b.数字函数：参数可以是表中的,也可以是一个数字表达式</h5><pre><code>常用的有：
+    ans(x):返回数字x的绝对值    abs(-2.5) 2.5
+    ceil(x):返回值&gt;=n的最小整数        ceil(-2.5) -2; ceil(2.5) 3
+    floor(x):返回值&lt;=数字n的最大整数    floor(123.3) 123; floor(-123.3) -124
+    round(x,[a]):四舍五入到整数位. a&lt;0,到小数点前a位;a&gt;0,到小数点后a位 round(155.34567,-2) 200;round(155.34567,2) 155.35
+    trunc(x,[a]):不四舍五入,根据a来截取x中的数字. a&lt;0,截取到小数点前a位;a&gt;0,到小数点后a位 (155.34567,-2) 100;(155.34567,2) 155.34
+    mod(a,b)：返回a/b的余数,如果数字b=0,那么返回a mod(3,4) 3
+</code></pre><h5 id="emsp-emsp-c-日期函数-对日期进行运算"><a href="#emsp-emsp-c-日期函数-对日期进行运算" class="headerlink" title="&emsp;&emsp;c.日期函数:对日期进行运算"></a>&emsp;&emsp;c.日期函数:对日期进行运算</h5><pre><code>常用的有：
+    add_months(a,b):在日期a上,加上指定月数b,返回计算后的新日期
+        select sysdate,add_months(sysdate,3) from dual; 1月24  4月24
+    last_day(a)：返回指定日期当月的最后一天
+        select sysdate,last_day(sysdate) from dual; 1月31
+    round(a,[,fmt]):a是日期,fmt是四舍五入日期的值的格式.默认fmt是一个月中的某一天：&quot;DDD&quot;
+        1)fmt默认为&quot;DDD&quot;,当前日期最靠近的那一天,根据日期分前半天,后半天
+        2)如果fmt是&quot;DAY&quot;,会舍入到最近周的周日,就会将上半周舍去,下半周为下一周的周日
+        3)如果fmt是&quot;MONTH&quot;,会舍入到某个月的1号,会将前月舍去,后半月作为下一个月
+        4)如果fmt是&quot;YEAR&quot;,会舍入到某一年的1月1号,会将前半年舍去,后半年作为下一年
+        select sysdate,
+            round(sysdate),round(sysdate,&apos;DAY&apos;),round(sysdate,&apos;MONTH&apos;),round(sysdate,&apos;year&apos;)
+            from dual;
+        2018/1/24 星期三 19:07:59    2018/1/25 星期四    2018/1/28 星期日    2018/2/1 星期四    2018/1/1 星期一
+
+    trync(d,[,fmt])：不对日期进行四舍五入,直接截取到第一天(上述不同格式)
+    extract(fmt from d):用于提取日期中的特定部分
+        select sysdate,extract(MONTH from sysdate) from dual;
+            2018/1/24 星期三 19:23:29    1
+</code></pre><h5 id="emsp-emsp-d-转换函数：一种数据类型转换为另外一种数据类型"><a href="#emsp-emsp-d-转换函数：一种数据类型转换为另外一种数据类型" class="headerlink" title="&emsp;&emsp;d.转换函数：一种数据类型转换为另外一种数据类型"></a>&emsp;&emsp;d.转换函数：一种数据类型转换为另外一种数据类型</h5><pre><code>常用的有：
+    to_char():把日期和数字转换为制定格式的字符串.
+    select to_char(sysdate,&apos;yyyy-mm-dd hh12:mi:ss&apos;) from dual;
+    2018-01-24 07:40:56
+</code></pre>
       
     </div>
     
@@ -684,7 +750,7 @@ grant delete,update on 用户名.表名 to scott; (系统管理员)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基础部分："><span class="nav-number">1.</span> <span class="nav-text">一、基础部分：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建临时表空间-sys用户才可以创建表空间"><span class="nav-number">1.1.</span> <span class="nav-text">创建临时表空间 (sys用户才可以创建表空间)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表空间"><span class="nav-number">1.2.</span> <span class="nav-text">创建表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户并指定表空间"><span class="nav-number">1.3.</span> <span class="nav-text">创建用户并指定表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权给新建的用户"><span class="nav-number">1.4.</span> <span class="nav-text">授权给新建的用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权操作表的权限"><span class="nav-number">1.5.</span> <span class="nav-text">授权操作表的权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、SQL函数"><span class="nav-number">2.</span> <span class="nav-text">二、SQL函数:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基础部分："><span class="nav-number">1.</span> <span class="nav-text">一、基础部分：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建临时表空间-sys用户才可以创建表空间"><span class="nav-number">1.1.</span> <span class="nav-text">创建临时表空间 (sys用户才可以创建表空间)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表空间"><span class="nav-number">1.2.</span> <span class="nav-text">创建表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户并指定表空间"><span class="nav-number">1.3.</span> <span class="nav-text">创建用户并指定表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权给新建的用户"><span class="nav-number">1.4.</span> <span class="nav-text">授权给新建的用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权操作表的权限"><span class="nav-number">1.5.</span> <span class="nav-text">授权操作表的权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Oracle数据库常用内置函数："><span class="nav-number">2.</span> <span class="nav-text">二、Oracle数据库常用内置函数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-分类"><span class="nav-number">2.1.</span> <span class="nav-text">1.分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-详细介绍"><span class="nav-number">2.2.</span> <span class="nav-text">2.详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#emsp-1-单行函数-就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 1)单行函数:就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-a-字符函数：操作的对象是字符串"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">  a.字符函数：操作的对象是字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-b-数字函数：参数可以是表中的-也可以是一个数字表达式"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">  b.数字函数：参数可以是表中的,也可以是一个数字表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-c-日期函数-对日期进行运算"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">  c.日期函数:对日期进行运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-d-转换函数：一种数据类型转换为另外一种数据类型"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">  d.转换函数：一种数据类型转换为另外一种数据类型</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
