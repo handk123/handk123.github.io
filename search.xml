@@ -33,7 +33,7 @@
     <entry>
       <title><![CDATA[Oracle中的sql函数]]></title>
       <url>/2018/01/28/dba-2/</url>
-      <content type="html"><![CDATA[<h2 id="1-orcle中的sql相关"><a href="#1-orcle中的sql相关" class="headerlink" title="1.orcle中的sql相关"></a>1.orcle中的sql相关</h2><h3 id="emsp-1-oracle-中的数据类型"><a href="#emsp-1-oracle-中的数据类型" class="headerlink" title="&emsp;1)oracle 中的数据类型"></a>&emsp;1)oracle 中的数据类型</h3><pre><code>    字符型：
+      <content type="html"><![CDATA[<h2 id="1-oracle中的sql相关"><a href="#1-oracle中的sql相关" class="headerlink" title="1.oracle中的sql相关"></a>1.oracle中的sql相关</h2><h3 id="emsp-1-oracle-中的数据类型"><a href="#emsp-1-oracle-中的数据类型" class="headerlink" title="&emsp;1)oracle 中的数据类型"></a>&emsp;1)oracle 中的数据类型</h3><pre><code>    字符型：
         char:1-2000字节的定长字符
         varchar2:1-4000字节的变长字符
     数值型：
@@ -70,8 +70,8 @@ alter table stu_tbl add (stu_age number);--添加新列
 alter table stu_tbl drop(sex);--删除列
 alter table stu_tbl modify(stu_sex varchar2(2));--更改列的数据类型
 alter table stu_tbl add constraint pk_stu_tbl primary key(id);--添加约束
-</code></pre><h3 id="emsp-5-操作符"><a href="#emsp-5-操作符" class="headerlink" title="&emsp;5)操作符"></a>&emsp;5)操作符</h3><pre><code>算术操作符:L+-*/
-比较操作符:L=,!=,&lt;&gt;,&gt;,&lt;,&gt;=,&lt;=,between-and,in,like,is null等
+</code></pre><h3 id="emsp-5-操作符"><a href="#emsp-5-操作符" class="headerlink" title="&emsp;5)操作符"></a>&emsp;5)操作符</h3><pre><code>算术操作符:+-*/
+比较操作符:=,!=,&lt;&gt;,&gt;,&lt;,&gt;=,&lt;=,between-and,in,like,is null等
 逻辑操作符:Land,or,not
 集合操作符:Lunion,union all,intersect,minus
     minus是获取第一张表独有的数据
