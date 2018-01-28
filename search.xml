@@ -3,6 +3,119 @@
   
     
     <entry>
+      <title><![CDATA[2018年新的开始]]></title>
+      <url>/2018/01/28/myfirst/</url>
+      <content type="html"><![CDATA[<h2 id="新的征程"><a href="#新的征程" class="headerlink" title="新的征程"></a>新的征程</h2><p>&emsp;之前在很久的时候，就想过可以有写自己东西的一个地方，不管是笔记还是一些随笔，但是始终都没有发现过好一点的记录器，一次偶然的机会发现了可以自己搭建博客，所以花了大概前前后后4天，搭建好了，可以在这里边写一些技术上的还有一些生活上的琐事，也算是自己的一个小库吧。</p>
+<h3 id="关于18年的计划"><a href="#关于18年的计划" class="headerlink" title="关于18年的计划"></a>关于18年的计划</h3><ul>
+<li>数据库知识梳理</li>
+<li>框架知识整理</li>
+<li>动手写相关代码</li>
+<li>坚持每天学习</li>
+</ul>
+<h3 id="关于本人"><a href="#关于本人" class="headerlink" title="关于本人"></a>关于本人</h3><p>&emsp;但行好事，不问前程</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 生活 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Oracle中的sql函数]]></title>
+      <url>/2018/01/28/dba-2/</url>
+      <content type="html"><![CDATA[<h2 id="1-orcle中的sql相关"><a href="#1-orcle中的sql相关" class="headerlink" title="1.orcle中的sql相关"></a>1.orcle中的sql相关</h2><h3 id="emsp-1-oracle-中的数据类型"><a href="#emsp-1-oracle-中的数据类型" class="headerlink" title="&emsp;1)oracle 中的数据类型"></a>&emsp;1)oracle 中的数据类型</h3><pre><code>    字符型：
+        char:1-2000字节的定长字符
+        varchar2:1-4000字节的变长字符
+    数值型：
+        number:最高精度38位
+    日期时间型：
+        date:精确到ss
+        timestamp:秒值精确到小数点后6位
+    函数：
+        sysdate,systimestamp返回系统的当前日期,时间和时区
+    伪列：
+        rowid,rownum
+        rowid:表中行的存储地址，可唯一标示数据库中的某一行，可以使用该列快速定位表中的行。
+        rownum:查询返回结果集中的行的序号，可以使用它来限制查询返回的行数
+更改时间的显示：
+    alter session set nls_date_language=’japanse’;
+    alter session set nls_date_format=’yyyy-mm-dd’;
+</code></pre><h3 id="emsp-2-sql支持的命令"><a href="#emsp-2-sql支持的命令" class="headerlink" title="&emsp;2)sql支持的命令"></a>&emsp;2)sql支持的命令</h3><pre><code>数据定义语言（DDL）:create,alter,drop
+数据操纵语言（DML）:insert,delete,update,select
+    利用现有的表创建表
+    create table stu_tbl_log as select id,stu_name,stu_age from stu_tbl;--
+    选择无重复的行
+    select distinct stu_name from stu_tbl;--
+    插入来自其他表中的记录
+    insert into stu_tbl_log select id,stu_name,stu_age from stu_tbl;
+数据控制语言（DCL）:grant,revoke
+事务控制语言（TCL）:commit,savepoint,rollback
+</code></pre><h3 id="emsp-3-操作表的命令"><a href="#emsp-3-操作表的命令" class="headerlink" title="&emsp;3)操作表的命令"></a>&emsp;3)操作表的命令</h3><pre><code>create table 创建
+alter table    修改
+truncate table    默认所有的表内容都删除,删除速度比delete快
+drop table    用于删除表（表的结构、属性以及索引也会被删除）
+</code></pre><h3 id="emsp-4-修改表命令"><a href="#emsp-4-修改表命令" class="headerlink" title="&emsp;4)修改表命令"></a>&emsp;4)修改表命令</h3><pre><code>alter table stu_table rename to stu_tbl;--修改表名
+alter table stu_tbl rename column stu_sex to sex;--修改列名
+alter table stu_tbl add (stu_age number);--添加新列
+alter table stu_tbl drop(sex);--删除列
+alter table stu_tbl modify(stu_sex varchar2(2));--更改列的数据类型
+alter table stu_tbl add constraint pk_stu_tbl primary key(id);--添加约束
+</code></pre><h3 id="emsp-5-操作符"><a href="#emsp-5-操作符" class="headerlink" title="&emsp;5)操作符"></a>&emsp;5)操作符</h3><pre><code>算术操作符:L+-*/
+比较操作符:L=,!=,&lt;&gt;,&gt;,&lt;,&gt;=,&lt;=,between-and,in,like,is null等
+逻辑操作符:Land,or,not
+集合操作符:Lunion,union all,intersect,minus
+    minus是获取第一张表独有的数据
+    intersect是获取两张表中都有的数据
+    union是整合两张表的数据，都有的只显示一次
+    union all是纯粹的两张表数据整合
+连接操作符: ||
+</code></pre><h2 id="2-oracle中的数据库对象"><a href="#2-oracle中的数据库对象" class="headerlink" title="2.oracle中的数据库对象"></a>2.oracle中的数据库对象</h2><h3 id="emsp-1-锁：数据库用来控制共享资源并发访问的机制。"><a href="#emsp-1-锁：数据库用来控制共享资源并发访问的机制。" class="headerlink" title="&emsp;1)锁：数据库用来控制共享资源并发访问的机制。"></a>&emsp;1)锁：数据库用来控制共享资源并发访问的机制。</h3><pre><code>锁的类型：行级锁，表级锁
+    行级锁：对正在被修改的行进行锁定。行级锁也被称之为排他锁。
+在使用下列语句时，Oracle会自动应用行级锁：
+    insert,update,delete,select…… for update
+    select……for update允许用户一次锁定多条记录进行更新。
+    使用commit or rollback释放锁。
+表级锁：
+    lock table user_tbl in mode mode;
+表级锁类型：
+    行共享 row share
+    行排他 row exclusive
+    共享 share
+    共享行排他 share row exclusive
+    排他 exclusive
+死锁：两个或两个以上的事务相互等待对方释放资源，从而形成死锁
+</code></pre><h3 id="emsp-2-数据库对象"><a href="#emsp-2-数据库对象" class="headerlink" title="&emsp;2)数据库对象"></a>&emsp;2)数据库对象</h3><pre><code>oracle数据库对象又称模式对象
+数据库对象是逻辑结构的集合，最基本的数据库对象是表
+数据库对象：
+    表，序列，视图，索引
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> 数据库 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> oracle </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Oracle]]></title>
       <url>/2018/01/24/dba/</url>
       <content type="html"><![CDATA[<h2 id="一、基础部分："><a href="#一、基础部分：" class="headerlink" title="一、基础部分："></a>一、基础部分：</h2><h3 id="创建临时表空间-sys用户才可以创建表空间"><a href="#创建临时表空间-sys用户才可以创建表空间" class="headerlink" title="创建临时表空间 (sys用户才可以创建表空间)"></a>创建临时表空间 (sys用户才可以创建表空间)</h3><pre><code>create temporary tablespace 临时表空间名
@@ -90,6 +203,16 @@ grant delete,update on 用户名.表名 to scott; (系统管理员)
     to_char():把日期和数字转换为制定格式的字符串.
     select to_char(sysdate,&apos;yyyy-mm-dd hh12:mi:ss&apos;) from dual;
     2018-01-24 07:40:56
+</code></pre><h2 id="三、其他单行函数"><a href="#三、其他单行函数" class="headerlink" title="三、其他单行函数"></a>三、其他单行函数</h2><pre><code>1. nvl(a,b): 当a=null时,返回value,否则返回a
+2. nvl2(a,b,c): 当a=null时,返回c,否则返回b
+3. nullif(a,b): 当a=b时,返回null,否则返回a
+</code></pre><h2 id="四、分组函数"><a href="#四、分组函数" class="headerlink" title="四、分组函数"></a>四、分组函数</h2><pre><code>avg()
+min()
+max()
+sum()
+count()
+group by()
+having()
 </code></pre>]]></content>
       
         <categories>
@@ -102,34 +225,6 @@ grant delete,update on 用户名.表名 to scott; (系统管理员)
         <tags>
             
             <tag> oracle </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[2018年新的开始]]></title>
-      <url>/2018/01/22/myfirst/</url>
-      <content type="html"><![CDATA[<h2 id="新的征程"><a href="#新的征程" class="headerlink" title="新的征程"></a>新的征程</h2><p>&emsp;之前在很久的时候，就想过可以有写自己东西的一个地方，不管是笔记还是一些随笔，但是始终都没有发现过好一点的记录器，一次偶然的机会发现了可以自己搭建博客，所以花了大概前前后后4天，搭建好了，可以在这里边写一些技术上的还有一些生活上的琐事，也算是自己的一个小库吧。</p>
-<h3 id="关于18年的计划"><a href="#关于18年的计划" class="headerlink" title="关于18年的计划"></a>关于18年的计划</h3><ul>
-<li>数据库知识梳理</li>
-<li>框架知识整理</li>
-<li>动手写相关代码</li>
-<li>坚持每天学习</li>
-</ul>
-<h3 id="关于本人"><a href="#关于本人" class="headerlink" title="关于本人"></a>关于本人</h3><p>&emsp;但行好事，不问前程</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 生活 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 开始 </tag>
             
         </tags>
         

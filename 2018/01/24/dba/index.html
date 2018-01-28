@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Handk">
 <meta property="og:description" content="一、基础部分：创建临时表空间 (sys用户才可以创建表空间)create temporary tablespace 临时表空间名    tempfile &amp;apos;G:\app\ASUS\oradata\orcl\创建一个dbf后缀的文件&amp;apos; (自己本机安装位置)    size 10M    autoextend on    next 10M maxsize unlimited">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-24T12:34:27.678Z">
+<meta property="og:updated_time" content="2018-01-28T07:40:32.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Oracle">
 <meta name="twitter:description" content="一、基础部分：创建临时表空间 (sys用户才可以创建表空间)create temporary tablespace 临时表空间名    tempfile &amp;apos;G:\app\ASUS\oradata\orcl\创建一个dbf后缀的文件&amp;apos; (自己本机安装位置)    size 10M    autoextend on    next 10M maxsize unlimited">
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,330 字
+                  1,399 字
                 </span>
               
 
@@ -515,6 +515,16 @@ grant delete,update on 用户名.表名 to scott; (系统管理员)
     to_char():把日期和数字转换为制定格式的字符串.
     select to_char(sysdate,&apos;yyyy-mm-dd hh12:mi:ss&apos;) from dual;
     2018-01-24 07:40:56
+</code></pre><h2 id="三、其他单行函数"><a href="#三、其他单行函数" class="headerlink" title="三、其他单行函数"></a>三、其他单行函数</h2><pre><code>1. nvl(a,b): 当a=null时,返回value,否则返回a
+2. nvl2(a,b,c): 当a=null时,返回c,否则返回b
+3. nullif(a,b): 当a=b时,返回null,否则返回a
+</code></pre><h2 id="四、分组函数"><a href="#四、分组函数" class="headerlink" title="四、分组函数"></a>四、分组函数</h2><pre><code>avg()
+min()
+max()
+sum()
+count()
+group by()
+having()
 </code></pre>
       
     </div>
@@ -587,15 +597,15 @@ grant delete,update on 用户名.表名 to scott; (系统管理员)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/22/myfirst/" rel="next" title="2018年新的开始">
-                <i class="fa fa-chevron-left"></i> 2018年新的开始
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/28/dba-2/" rel="prev" title="Oracle中的sql函数">
+                Oracle中的sql函数 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -679,7 +689,7 @@ grant delete,update on 用户名.表名 to scott; (系统管理员)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -750,7 +760,7 @@ grant delete,update on 用户名.表名 to scott; (系统管理员)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基础部分："><span class="nav-number">1.</span> <span class="nav-text">一、基础部分：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建临时表空间-sys用户才可以创建表空间"><span class="nav-number">1.1.</span> <span class="nav-text">创建临时表空间 (sys用户才可以创建表空间)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表空间"><span class="nav-number">1.2.</span> <span class="nav-text">创建表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户并指定表空间"><span class="nav-number">1.3.</span> <span class="nav-text">创建用户并指定表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权给新建的用户"><span class="nav-number">1.4.</span> <span class="nav-text">授权给新建的用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权操作表的权限"><span class="nav-number">1.5.</span> <span class="nav-text">授权操作表的权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Oracle数据库常用内置函数："><span class="nav-number">2.</span> <span class="nav-text">二、Oracle数据库常用内置函数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-分类"><span class="nav-number">2.1.</span> <span class="nav-text">1.分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-详细介绍"><span class="nav-number">2.2.</span> <span class="nav-text">2.详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#emsp-1-单行函数-就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 1)单行函数:就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-a-字符函数：操作的对象是字符串"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">  a.字符函数：操作的对象是字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-b-数字函数：参数可以是表中的-也可以是一个数字表达式"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">  b.数字函数：参数可以是表中的,也可以是一个数字表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-c-日期函数-对日期进行运算"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">  c.日期函数:对日期进行运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-d-转换函数：一种数据类型转换为另外一种数据类型"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">  d.转换函数：一种数据类型转换为另外一种数据类型</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基础部分："><span class="nav-number">1.</span> <span class="nav-text">一、基础部分：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建临时表空间-sys用户才可以创建表空间"><span class="nav-number">1.1.</span> <span class="nav-text">创建临时表空间 (sys用户才可以创建表空间)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表空间"><span class="nav-number">1.2.</span> <span class="nav-text">创建表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户并指定表空间"><span class="nav-number">1.3.</span> <span class="nav-text">创建用户并指定表空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权给新建的用户"><span class="nav-number">1.4.</span> <span class="nav-text">授权给新建的用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权操作表的权限"><span class="nav-number">1.5.</span> <span class="nav-text">授权操作表的权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Oracle数据库常用内置函数："><span class="nav-number">2.</span> <span class="nav-text">二、Oracle数据库常用内置函数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-分类"><span class="nav-number">2.1.</span> <span class="nav-text">1.分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-详细介绍"><span class="nav-number">2.2.</span> <span class="nav-text">2.详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#emsp-1-单行函数-就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 1)单行函数:就是说我们在进行表的操作上时，只能够输入一行，然后输出一个结果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-a-字符函数：操作的对象是字符串"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">  a.字符函数：操作的对象是字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-b-数字函数：参数可以是表中的-也可以是一个数字表达式"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">  b.数字函数：参数可以是表中的,也可以是一个数字表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-c-日期函数-对日期进行运算"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">  c.日期函数:对日期进行运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#emsp-emsp-d-转换函数：一种数据类型转换为另外一种数据类型"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">  d.转换函数：一种数据类型转换为另外一种数据类型</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、其他单行函数"><span class="nav-number">3.</span> <span class="nav-text">三、其他单行函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、分组函数"><span class="nav-number">4.</span> <span class="nav-text">四、分组函数</span></a></li></ol></div>
             
 
           </div>
