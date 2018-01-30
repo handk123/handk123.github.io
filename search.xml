@@ -3,6 +3,104 @@
   
     
     <entry>
+      <title><![CDATA[MySQL数据库]]></title>
+      <url>/2018/01/30/dba-mysql/</url>
+      <content type="html"><![CDATA[<h2 id="1-Mysql常用的命令："><a href="#1-Mysql常用的命令：" class="headerlink" title="1.Mysql常用的命令："></a>1.Mysql常用的命令：</h2><pre><code>登陆mysql数据库：mysql -u root -p
+Dos下的清屏：cls
+显示帮助的命令清单：\h;
+清除当前输入的语句：\c
+查询当前安装mysql版本号：select version();
+查看mysql服务器状态信息：\s  (\status)效果一样
+退出数据库:\q;
+数据库的导入和导出：
+    导入：source 库名.sql
+    导出：mysqldump -u 用户名 -p 库名&gt;库名.sql
+显示所有的数据库：show databases;
+选择数据库：use 库名
+查看当前数据库中的所有表：select database();
+</code></pre><h2 id="2-Mysql中的字段类型"><a href="#2-Mysql中的字段类型" class="headerlink" title="2.Mysql中的字段类型"></a>2.Mysql中的字段类型</h2><pre><code>Int:
+    4个字节,32位,无符号最小值:0,最大值:4294967295
+    比如：Int(5),5跟字段类型允许的范围无关,只是在数据库表中显示的位数为5,位数不够用0填补(前提设置了zero fill)。比如你存的数字是123，在数据库中显示为00123，但是读出来还是123，没有0；位数大于5，比如存123456，就还是显示123456；
+Vachar：
+    比如：varchar(50),跟mysql版本有关系
+        4.0版本以下,指50字节,如果存放UTF-8汉字,只能存16个(每个汉字3字节)
+        5.0版本以上,指50字符,无论存放UTF-8汉字、字母还是数字都可以存放50个
+</code></pre><h2 id="3-Mysql操作语言"><a href="#3-Mysql操作语言" class="headerlink" title="3.Mysql操作语言"></a>3.Mysql操作语言</h2><h3 id="emsp-1-DDL：数据定义语言"><a href="#emsp-1-DDL：数据定义语言" class="headerlink" title="&emsp;1)DDL：数据定义语言"></a>&emsp;1)DDL：数据定义语言</h3><pre><code>作用：定义数据库或者表结构
+关键字：create,alter,drop
+创建数据库：create database 数据库名
+删除数据库：drop datebase 数据库名
+创建表结构：create table 表名
+                列名 列的数据类型 列的完整性约束;
+    注意:主键约束,primary key 一张表就一个主键,非空且唯一
+         唯一性,unique 不允许重复,但是可以为空,可以定义多个唯一约束
+         有外键时,先建父表,在创建子表;插入数据时候,先插入父表,再插入子表;删除数据时,先删除子表数据,再删除父表数据
+查看表结构：desc 表名(常用)、describe 表名、show columns from 表名、
+修改表的名称：alter table 原表名 rename to 新表名;rename table 原表名 to 新表名;
+修改表的编码字符集：alter table 表名 character set    字符集;
+向表中添加一列:
+    alter table 表名 change 原列名 新列名 列数据类型(修改表中的某一列列名，同时修改列的数据类型)
+    alter table 表名 modify 列名 列新的数据类型(修改表中的某一列的数据类型)
+删除表中的某一列：alter table 表名 drop 列名;
+删除表：drop table (彻底删除表,数据库中不会保留表结构)、truncate 表名
+</code></pre><h3 id="emsp-2-DML：数据操作语言"><a href="#emsp-2-DML：数据操作语言" class="headerlink" title="&emsp;2)DML：数据操作语言"></a>&emsp;2)DML：数据操作语言</h3><pre><code>作用：操作表中的数据
+关键字：insert,update,delete
+向表中插入数据：
+    insert into 表名 values(列值1,列值2,....)(插入顺序和建表顺序对应)
+    insert into 表名 values(列值1,列值2,....)(常用)
+    insert into 表名 values(列值1,列值2,..)(列值1,列值2,..)(一次插入多条数据)
+修改某一列的所有字段值为新的字段值：
+    update 表名 set 列名 = 新字段值;
+    update 表名 set 列名 = 新字段值, 列名=新字段值....;(用于批量修改)
+修改某一条记录的字段值：
+    update 表名 set 列名 = 新字段值 where 列名 = 字段值;
+    update 表名 set 列名 = 新字段值,列名=新字段值...where 列名=新字段值...where 列名=字段值；(多个字段的字段值都是该值)
+删除表中的某一条记录：delete from 表名 where 列名 = 列值;
+删除表: delete from 表名;
+注意:drop、truncate、delete区别？
+    a)drop和truncate是DDL,而delete是DML。
+    b)truncate和delete只删除数据，不会删除表的结构，而drop会把数据和表结构都删除。
+    c)delete可以带where有条件的删除，可以回滚(rollback)，但删除速度较truncate较慢。而truncate则不可以删除特定的数据，也不可以回滚(rollback)，但删除速度比delete快。
+建议：小心使用drop和truncate，尤其在数据没有备份的情况下
+</code></pre><h3 id="emsp-3-DQL-数据查询语言"><a href="#emsp-3-DQL-数据查询语言" class="headerlink" title="&emsp;3)DQL: 数据查询语言"></a>&emsp;3)DQL: 数据查询语言</h3><pre><code>关键字：select
+查询表中所有的记录:
+    select * from 表名 (表中所有的列)
+    select 列1,列2,..from 表名;(效果同上)
+查询表中某一条记录：select * from 表名 where 列名 = 字段值;
+过滤表中重复的数据(关键字distinct): select distinct 列名 from 表名;
+排序(关键字order by):
+    select * from 表名 order by 列名 asc; (默认是升序,asc可省略)
+    select * from 表名 order by 列名 desc; (降序)
+    例：select sno,sname,grade from student order by grade desc;
+分页查询(关键字limit):
+    select * from 表名 limit(pageNo-1)*pagesize,pagesize;
+        pageNo:要查询的页数; pageSize:每页显示的记录数
+模糊查询(关键字like): select * from 表名 where 列名 like &apos;%&apos;;
+范围查询(关键字between..and..,in()): select * from 表名 where 列名  between 字段值(小) and 字段值(大);//包含两端的字段值
+使用别名: select 字段名 别名,字段名 别名 from 表名;
+复制表：create table 新表名 select * from 被复制表的表名;(新表的表结构和数据与原表相同)
+聚合函数：
+    a)返回指定列非空值的个数：select count(列名) from 表名
+    b)返回指定列的最值：select  max(列名) from 表名; min(列名)最小
+    c)返回指定列的平均：select avg(列名) from 表名;
+    d)返回指定列的所有值之和：select sum(列名) from 表名;
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> 数据库 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Mysql </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[2018年新的开始]]></title>
       <url>/2018/01/28/myfirst/</url>
       <content type="html"><![CDATA[<h2 id="新的征程"><a href="#新的征程" class="headerlink" title="新的征程"></a>新的征程</h2><p>&emsp;之前在很久的时候，就想过可以有写自己东西的一个地方，不管是笔记还是一些随笔，但是始终都没有发现过好一点的记录器，一次偶然的机会发现了可以自己搭建博客，所以花了大概前前后后4天，搭建好了，可以在这里边写一些技术上的还有一些生活上的琐事，也算是自己的一个小库吧。</p>
@@ -116,7 +214,7 @@ alter table stu_tbl add constraint pk_stu_tbl primary key(id);--添加约束
     </entry>
     
     <entry>
-      <title><![CDATA[Oracle]]></title>
+      <title><![CDATA[Oracle数据库]]></title>
       <url>/2018/01/24/dba/</url>
       <content type="html"><![CDATA[<h2 id="一、基础部分："><a href="#一、基础部分：" class="headerlink" title="一、基础部分："></a>一、基础部分：</h2><h3 id="创建临时表空间-sys用户才可以创建表空间"><a href="#创建临时表空间-sys用户才可以创建表空间" class="headerlink" title="创建临时表空间 (sys用户才可以创建表空间)"></a>创建临时表空间 (sys用户才可以创建表空间)</h3><pre><code>create temporary tablespace 临时表空间名
    tempfile &apos;G:\app\ASUS\oradata\orcl\创建一个dbf后缀的文件&apos; (自己本机安装位置)
