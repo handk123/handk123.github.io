@@ -7,7 +7,7 @@
       <url>/2018/01/30/mysql/</url>
       <content type="html"><![CDATA[<h2 id="1-sql基础教程"><a href="#1-sql基础教程" class="headerlink" title="1.sql基础教程"></a>1.sql基础教程</h2><font color="#FF4500" size="2">注意：sql对大小写不敏感</font>
 
-<pre><code>sql：结构化查询语言,是我们用能力访问数据库;是一种ANSI的标准计算语言
+<pre><code>sql：结构化查询语言,使我们有能力访问数据库;是一种ANSI的标准计算语言
 
 sql分为：DML(数据操作语言)、DDL(数据定义语言)
     DML：select,update.delete,insert into
