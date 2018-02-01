@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Handk">
 <meta property="og:description" content="1.sql基础教程注意：sql对大小写不敏感  sql：结构化查询语言,使我们有能力访问数据库;是一种ANSI的标准计算语言  sql分为：DML(数据操作语言)、DDL(数据定义语言)     DML：select,update.delete,insert into     DDL: 创建和删除表格,可以定义索引(键),规定表之间的链接,施加表之间的约束 常用的DML语句：     create">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-01T01:01:59.873Z">
+<meta property="og:updated_time" content="2018-02-01T09:35:40.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sql语句">
 <meta name="twitter:description" content="1.sql基础教程注意：sql对大小写不敏感  sql：结构化查询语言,使我们有能力访问数据库;是一种ANSI的标准计算语言  sql分为：DML(数据操作语言)、DDL(数据定义语言)     DML：select,update.delete,insert into     DDL: 创建和删除表格,可以定义索引(键),规定表之间的链接,施加表之间的约束 常用的DML语句：     create">
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  777 字
+                  1,668 字
                 </span>
               
 
@@ -497,6 +497,99 @@ delete: 用于删除表中的行
     delete from 表名称 where 列名称 = 值
     delete from Person where LastName = &apos;a&apos;;
     delete * from table_name //在不删除表的情况下删除所有的行,表的结构、属性和索引都是正常的
+</code></pre><h2 id="2-sql高级编程"><a href="#2-sql高级编程" class="headerlink" title="2.sql高级编程"></a>2.sql高级编程</h2><pre><code>top子句：用于规定要返回的记录的数目
+select top 2 * from Persons //选取头两条记录
+select top 50 percent * from Persons //选取50%的记录
+mysql用法：
+    select column_name(s)
+    from table_name
+    limit number
+oracle用法：
+    select column_name(s)
+    from table_name
+    where rownum &lt;= number
+
+like:用于wehere 子句中搜索列的指定模式
+    select column_name(s) from table_name where column_name like pattern
+
+    select * from Persons where City like &apos;N%&apos;  //选取Persons表中居住以N开始的城市中的人
+    select * from Persons where City like &apos;%g&apos; //选取Persons表中居住在以g结尾的城市里的人
+    select * from Persons where City like &apos;%ln%&apos; //选取Persons 表中居住城市含有ln字母的人
+    select * from Persons where City not like &apos;%ln%&apos; //选取Persons表中居住城市不包含l字母的人
+
+SQL通配符：进行搜索数据库中的数据时,通配符可以替代一个或多个字符
+    SQL通配符必须与like运算符一起运用
+    通配符：
+        %    替代一个或多个字符
+        _    仅替代一个字符
+        charlist]    字符列中的任何单一字符
+        [^charlist]
+        或者        不在字符列中的任何单一字符
+        [!charlist]
+    select * from Persons where City like &apos;N%&apos; //选取居住以N开始的城市里的人
+    select * from Persons where City like &apos;%LN%&apos; //选取居住包含LN的城市里的人
+    select * from Persons where FirstName like &apos;_he&apos; //选取名字第一个字符之后是&quot;he&quot;的人
+    select * from Persons where LastName like &apos;A_r_h&apos; //选取名字以&quot;A&quot;开头,然后是一个任意字符，然后是&quot;r&quot;,然后是任意字符,然后是&quot;h&quot;
+    select * from Persons where City like &apos;[ALN]%&apos; //选取居住城市以&quot;A&quot; 或 &quot;L&quot; 或 &quot;N&quot; 开头的人
+    select * from Persons where City like &apos;[!ALN]%&apos; //选取居住城市不以&quot;A&quot; 或 &quot;L&quot; 或 &quot;N&quot; 开头的人
+in：允许在where子句中规定多个值
+    select * from table_name where column_name in (value1,value2,...)
+    select * from Persons where LastName in (&apos;ad&apos;,&apos;bc&apos;) //选取姓氏为ad,bc的人
+
+between:在where 子句中使用,作用是选取介于两值之间的数据范围
+    select * from table_name where column_name between value1 and value2
+    select * from Persons where LastName between &apos;a&apos; and &apos;b&apos; //显示介于a(包括)和b(不包括)之间的人
+    select * from Persons where LastName not between &apos;a&apos; and &apos;b&apos; //上述例子显示之外的人
+
+Alias:别名
+    针对表来说： select * from table_name as alias_name
+    针对列来说： select column_name as alias_name from table_name
+
+    select po.Id,p.LastName,p.FirstName from Persons as p,Pro_Oder as po where p.LastName = &apos;a&apos; and p.FirstName =&apos;b&apos; //使用表名别名
+    select LastName as Family,FirstName as Name From Persons  //使用一个列名别名
+
+join:根据两个或者多个表中的列之间的关系,从这些表中查询数据
+    未使用join:
+    select Persons.LastName, Persons.FirstName, Orders.OrderNo
+    from Persons, Orders
+    where Persons.Id_P = Orders.Id_p  //引用两个表
+    使用join:
+    select Persons.LastName,Persons.FirstName,Orders.OrderNo
+    from Persons
+    inner join Orders on Persons.Id_P  = Orders.Id_P
+    order by Persons.LastName
+
+inner join:内连接,当表中存在至少一个匹配时候,inner join关键字返回行
+    inner join 和 join 是相同的
+    select * from table_name1
+    inner join table_name2
+    on table_name1.column_name = table_name2.column_name
+
+    select Persons.LastName,Persons.FirstName,Orders.OrderNo
+    from Persons
+    inner join Orders
+    on Persons.Id_p = Orders.Id_p
+    order by Persons.LastName
+
+left join:左连接,会从左表(table_name1)那里返回所有的行,即使在右表(table_name2)中没有匹配的行
+    select column_name(s) from table_name1
+    left join table_name2
+    on table_name1.column_name = table_name2.column_name
+
+    select user.uname,user.job,emp.ename from emp
+    LEFT JOIN user
+    ON user.eno = emp.eno;
+
+    注意：在某些数据库中,left join 称为 left outer join
+
+right join:右连接,会从右表(table_name2)那里返回所有的行,即使在左表(table_name1)中没有匹配的行
+    select column_name(s) from table_name1
+    right join table_name2
+    on table_name1.column_name = table_name2.column_name
+
+    select user.uname,user.job,emp.ename
+    from user RIGHT JOIN emp
+    ON user.eno = emp.eno;
 </code></pre>
       
     </div>
@@ -732,7 +825,7 @@ delete: 用于删除表中的行
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-sql基础教程"><span class="nav-number">1.</span> <span class="nav-text">1.sql基础教程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-sql基础教程"><span class="nav-number">1.</span> <span class="nav-text">1.sql基础教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-sql高级编程"><span class="nav-number">2.</span> <span class="nav-text">2.sql高级编程</span></a></li></ol></div>
             
 
           </div>
