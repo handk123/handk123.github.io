@@ -3,6 +3,26 @@
   
     
     <entry>
+      <title><![CDATA[Error]]></title>
+      <url>/2018/02/02/Error/</url>
+      <content type="html"></content>
+      
+        <categories>
+            
+            <category> Bug </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Sql语句]]></title>
       <url>/2018/01/30/mysql/</url>
       <content type="html"><![CDATA[<h2 id="1-sql基础教程"><a href="#1-sql基础教程" class="headerlink" title="1.sql基础教程"></a>1.sql基础教程</h2><font color="#FF4500" size="2">注意：sql对大小写不敏感</font>
@@ -122,50 +142,43 @@ Alias:别名
 
     select po.Id,p.LastName,p.FirstName from Persons as p,Pro_Oder as po where p.LastName = &apos;a&apos; and p.FirstName =&apos;b&apos; //使用表名别名
     select LastName as Family,FirstName as Name From Persons  //使用一个列名别名
+</code></pre><h5 id="join-根据两个或者多个表中的列之间的关系-从这些表中查询数据"><a href="#join-根据两个或者多个表中的列之间的关系-从这些表中查询数据" class="headerlink" title="join:根据两个或者多个表中的列之间的关系,从这些表中查询数据"></a>join:根据两个或者多个表中的列之间的关系,从这些表中查询数据</h5><pre><code>未使用join:
+select Persons.LastName, Persons.FirstName, Orders.OrderNo
+from Persons, Orders
+where Persons.Id_P = Orders.Id_p  //引用两个表
+使用join:
+select Persons.LastName,Persons.FirstName,Orders.OrderNo
+from Persons
+inner join Orders on Persons.Id_P  = Orders.Id_P
+order by Persons.LastName
+</code></pre><h5 id="inner-join-内连接-当表中存在至少一个匹配时候-inner-join关键字返回行"><a href="#inner-join-内连接-当表中存在至少一个匹配时候-inner-join关键字返回行" class="headerlink" title="inner join:内连接,当表中存在至少一个匹配时候,inner join关键字返回行"></a>inner join:内连接,当表中存在至少一个匹配时候,inner join关键字返回行</h5><pre><code>inner join 和 join 是相同的
+select * from table_name1
+inner join table_name2
+on table_name1.column_name = table_name2.column_name
 
-join:根据两个或者多个表中的列之间的关系,从这些表中查询数据
-    未使用join:
-    select Persons.LastName, Persons.FirstName, Orders.OrderNo
-    from Persons, Orders
-    where Persons.Id_P = Orders.Id_p  //引用两个表
-    使用join:
-    select Persons.LastName,Persons.FirstName,Orders.OrderNo
-    from Persons
-    inner join Orders on Persons.Id_P  = Orders.Id_P
-    order by Persons.LastName
+select Persons.LastName,Persons.FirstName,Orders.OrderNo
+from Persons
+inner join Orders
+on Persons.Id_p = Orders.Id_p
+order by Persons.LastName
+</code></pre><h5 id="left-join-左连接-会从左表-table-name1-那里返回所有的行-即使在右表-table-name2-中没有匹配的行"><a href="#left-join-左连接-会从左表-table-name1-那里返回所有的行-即使在右表-table-name2-中没有匹配的行" class="headerlink" title="left join:左连接,会从左表(table_name1)那里返回所有的行,即使在右表(table_name2)中没有匹配的行"></a>left join:左连接,会从左表(table_name1)那里返回所有的行,即使在右表(table_name2)中没有匹配的行</h5><pre><code>select column_name(s) from table_name1
+left join table_name2
+on table_name1.column_name = table_name2.column_name
 
-inner join:内连接,当表中存在至少一个匹配时候,inner join关键字返回行
-    inner join 和 join 是相同的
-    select * from table_name1
-    inner join table_name2
-    on table_name1.column_name = table_name2.column_name
+select user.uname,user.job,emp.ename from emp
+LEFT JOIN user
+ON user.eno = emp.eno;
+注意：在某些数据库中,left join 称为 left outer join
+</code></pre><p><img src="/images/左连接.png" alt="“图片描述”"></p>
+<h5 id="right-join-右连接-会从右表-table-name2-那里返回所有的行-即使在左表-table-name1-中没有匹配的行"><a href="#right-join-右连接-会从右表-table-name2-那里返回所有的行-即使在左表-table-name1-中没有匹配的行" class="headerlink" title="right join:右连接,会从右表(table_name2)那里返回所有的行,即使在左表(table_name1)中没有匹配的行"></a>right join:右连接,会从右表(table_name2)那里返回所有的行,即使在左表(table_name1)中没有匹配的行</h5><pre><code>select column_name(s) from table_name1
+right join table_name2
+on table_name1.column_name = table_name2.column_name
 
-    select Persons.LastName,Persons.FirstName,Orders.OrderNo
-    from Persons
-    inner join Orders
-    on Persons.Id_p = Orders.Id_p
-    order by Persons.LastName
-
-left join:左连接,会从左表(table_name1)那里返回所有的行,即使在右表(table_name2)中没有匹配的行
-    select column_name(s) from table_name1
-    left join table_name2
-    on table_name1.column_name = table_name2.column_name
-
-    select user.uname,user.job,emp.ename from emp
-    LEFT JOIN user
-    ON user.eno = emp.eno;
-
-    注意：在某些数据库中,left join 称为 left outer join
-
-right join:右连接,会从右表(table_name2)那里返回所有的行,即使在左表(table_name1)中没有匹配的行
-    select column_name(s) from table_name1
-    right join table_name2
-    on table_name1.column_name = table_name2.column_name
-
-    select user.uname,user.job,emp.ename
-    from user RIGHT JOIN emp
-    ON user.eno = emp.eno;
-</code></pre>]]></content>
+select user.uname,user.job,emp.ename
+from user RIGHT JOIN emp
+ON user.eno = emp.eno;
+</code></pre><p><img src="/images/右连接.png" alt="“图片描述”"></p>
+]]></content>
       
         <categories>
             
