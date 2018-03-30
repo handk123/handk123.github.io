@@ -3,6 +3,61 @@
   
     
     <entry>
+      <title><![CDATA[Python学习笔记]]></title>
+      <url>/2018/03/30/python/</url>
+      <content type="html"><![CDATA[<h2 id="python2-7"><a href="#python2-7" class="headerlink" title="python2.7"></a>python2.7</h2><h2 id="1-python特性"><a href="#1-python特性" class="headerlink" title="1.python特性:"></a>1.python特性:</h2><pre><code>字节码
+动态(在赋值时确定数据类型)
+缩进
+
+脚本解释型语言的内部机制：
+    1.python现将脚本编译成字节码文件(pyc,pyo)
+    2.python虚拟机解释并运行字节码文件
+编译型语言的内部机制：
+    1.先将源代码编译成机器码，生成可执行文件
+    2.运行可执行文件
+</code></pre><h2 id="2-python编程基本方式"><a href="#2-python编程基本方式" class="headerlink" title="2.python编程基本方式"></a>2.python编程基本方式</h2><pre><code>文件开头设置编码格式:coding= utf-8
+注释： #、&quot;&quot;&quot;  &quot;&quot;&quot;
+处理结构：反斜杠 \,小括号()
+</code></pre><h2 id="3-对变量、对象、赋值的浅析"><a href="#3-对变量、对象、赋值的浅析" class="headerlink" title="3.对变量、对象、赋值的浅析"></a>3.对变量、对象、赋值的浅析</h2><pre><code>a.
+    一切数据都是对象
+    一切变量都是对数据对象的一个引用
+    python内部的引用计数：sys.getrefcount
+b.
+    变量命名规范
+    用字母和_开头
+    不能使用关键字
+    如何搭配：文件名小写、变量小写、函数名小写、驼峰原则也可以
+    大小写敏感
+c.
+    赋值
+    动态特性：a =2(数值型) ;b=&apos;你好&apos;(字符串)
+    多重赋值：a = b = c =2
+    删除
+</code></pre><h2 id="4-注意三大内置"><a href="#4-注意三大内置" class="headerlink" title="4.注意三大内置"></a>4.注意三大内置</h2><pre><code>type
+help(ctrl+shift+i)
+dir
+快捷键查看帮助文档(选中想要查看的关键字然后 ctrl+shift+i)
+</code></pre><ul>
+<li>2018.3.30</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> 语言 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Error]]></title>
       <url>/2018/02/02/Error/</url>
       <content type="html"></content>
