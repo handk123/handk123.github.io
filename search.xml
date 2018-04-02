@@ -3,6 +3,42 @@
   
     
     <entry>
+      <title><![CDATA[数据类型]]></title>
+      <url>/2018/04/02/python2/</url>
+      <content type="html"><![CDATA[<h2 id="1-数据类型的组成"><a href="#1-数据类型的组成" class="headerlink" title="1.数据类型的组成"></a>1.数据类型的组成</h2><pre><code>身份：id作为唯一标识符(内存地址标识)
+类型：通过(type)
+值
+</code></pre><h2 id="2-常用的基本数据类型"><a href="#2-常用的基本数据类型" class="headerlink" title="2.常用的基本数据类型"></a>2.常用的基本数据类型</h2><ul>
+<li>int 整型</li>
+<li>boolean 布尔值</li>
+<li>string 字符串</li>
+<li>list 列表</li>
+<li>tuple 元组 (就是那种小括号)</li>
+<li>dict 字典</li>
+</ul>
+<h2 id="3-数据类型分类"><a href="#3-数据类型分类" class="headerlink" title="3.数据类型分类"></a>3.数据类型分类</h2><pre><code>可变(id值不变,可以添加内容)：list,dict
+不可变(id值变,添加新内容需要重新定义变量)：int,string,tuple
+</code></pre><h1 id="4-变量的赋值是引用"><a href="#4-变量的赋值是引用" class="headerlink" title="4.变量的赋值是引用"></a>4.变量的赋值是引用</h1><ul>
+<li>2018.4.1</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> 语言 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Python学习笔记]]></title>
       <url>/2018/03/30/python/</url>
       <content type="html"><![CDATA[<h2 id="python2-7"><a href="#python2-7" class="headerlink" title="python2.7"></a>python2.7</h2><h2 id="1-python特性"><a href="#1-python特性" class="headerlink" title="1.python特性:"></a>1.python特性:</h2><pre><code>字节码
