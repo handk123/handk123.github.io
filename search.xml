@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title><![CDATA[summarize]]></title>
+      <url>/2018/07/02/summarize/</url>
+      <content type="html"><![CDATA[<h2 id="上班总结"><a href="#上班总结" class="headerlink" title="上班总结"></a>上班总结</h2><h3 id="2018-7-2"><a href="#2018-7-2" class="headerlink" title="2018.7.2"></a>2018.7.2</h3><p>  今天应该是2018年的下半年，也是入职后的第二周，在一个公司做实施的岗位，因为时间的缘故再加上之前的生病，对于这种工作其实还蛮满意的。<br>  在公司的话，上午学习101、201、301以及其他的主要任务，下午的话就是相对比较清闲，自己再看相关的文档。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 成长 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据类型]]></title>
       <url>/2018/04/02/python2/</url>
       <content type="html"><![CDATA[<h2 id="1-数据类型的组成"><a href="#1-数据类型的组成" class="headerlink" title="1.数据类型的组成"></a>1.数据类型的组成</h2><pre><code>身份：id作为唯一标识符(内存地址标识)
@@ -18,7 +39,7 @@
 </ul>
 <h2 id="3-数据类型分类"><a href="#3-数据类型分类" class="headerlink" title="3.数据类型分类"></a>3.数据类型分类</h2><pre><code>可变(id值不变,可以添加内容)：list,dict
 不可变(id值变,添加新内容需要重新定义变量)：int,string,tuple
-</code></pre><h1 id="4-变量的赋值是引用"><a href="#4-变量的赋值是引用" class="headerlink" title="4.变量的赋值是引用"></a>4.变量的赋值是引用</h1><ul>
+</code></pre><h1 id="4-变量hexo-的赋值是引用"><a href="#4-变量hexo-的赋值是引用" class="headerlink" title="4.变量hexo   的赋值是引用"></a>4.变量hexo   的赋值是引用</h1><ul>
 <li>2018.4.1</li>
 </ul>
 ]]></content>
